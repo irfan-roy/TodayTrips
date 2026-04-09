@@ -1,0 +1,33 @@
+<div class="relative w-full">
+  <!-- Dropdown button -->
+  <button
+    type="button"
+    (click)="isOpen = !isOpen"
+    class="block w-full px-4 py-2 pr-10 text-left bg-white border border-gray-300 rounded-3xl shadow hover:border-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-300 focus:border-orange-400 shadow-xl"
+  >
+    {{ selectedFruit || "Select" }}
+    <svg
+      class="absolute top-1/2 right-3 w-5 h-5 text-orange-400 -translate-y-1/2 pointer-events-none"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+    >
+      <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+    </svg>
+  </button>
+
+  <!-- Dropdown menu -->
+  <ul
+    *ngIf="isOpen"
+    class="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-xl shadow"
+  >
+    <li
+      *ngFor="let val of values"
+      (click)="selectedFruit = val; isOpen = false"
+      class="px-4 py-2 border-t border-gray-100 hover:bg-gray-100 cursor-pointer"
+    >
+      {{ val }}
+    </li>
+  </ul>
+</div>

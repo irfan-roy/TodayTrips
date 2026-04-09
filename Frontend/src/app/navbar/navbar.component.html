@@ -1,0 +1,43 @@
+<nav class="h-24 shadow-md bg-white">
+  <div class="container mx-auto px-6 flex justify-between items-center h-full">
+    <div>
+      <a [routerLink]="['/']" class="text-2xl font-bold text-blue-600"
+        >TodayTrip</a
+      >
+    </div>
+
+    <div class="flex gap-4 items-center">
+      <a
+        [routerLink]="['/become-host']"
+        class="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium"
+      >
+        Become a host
+      </a>
+      <a
+        [routerLink]="['/blogs']"
+        class="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium"
+      >
+        Blogs
+      </a>
+      <a
+        [routerLink]="['/trip']"
+        class="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium"
+      >
+        Trip
+      </a>
+
+      <a
+        [routerLink]="['/favorite']"
+        class="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium"
+      >
+        Favorite
+      </a>
+      <a
+        [routerLink]="['/sign-in']"
+        class="px-4 py-2 rounded-3xl hover:bg-gray-100 transition-colors duration-200 font-medium"
+      >
+        Sign in
+      </a>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,28 @@
+/* PrimeNG slider customization */
+:host ::ng-deep .custom-slider .p-slider-range {
+  background-color: #3b82f6 !important;
+
+  border-radius: 9999px;
+}
+
+:host ::ng-deep .custom-slider .p-slider-handle {
+  background: #eff6ff !important;
+  top: -2px;
+  border: 1px solid #eff6ff !important;
+  width: 25px;
+  height: 25px;
+  /* border-radius: 50%; */
+  /* padding: 5px; */
+  transition: all 0.2s ease-in-out;
+}
+
+:host ::ng-deep .custom-slider .p-slider-handle:hover {
+  transform: scale(1.2);
+  background: #eff6ff !important;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.3);
+}
+
+:host ::ng-deep .custom-slider {
+  top: 2px;
+  height: 2.3px !important;
+}

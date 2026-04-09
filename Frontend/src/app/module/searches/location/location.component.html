@@ -1,0 +1,254 @@
+<div
+  class="container mx-auto px-4 py-8 max-w-full rounded-2xl border hover:border-gray-400 hover:shadow-2xl transition duration-100 ease-in"
+>
+  <!-- Header -->
+  <div class="text-center mb-8">
+    <h1
+      class="text-4xl font-bold text-gray-800 mb-2 flex items-center justify-center gap-3"
+    >
+      <svg
+        class="w-8 h-8 text-blue-600"
+        fill="currentColor"
+        viewBox="0 0 20 20"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+          clip-rule="evenodd"
+        ></path>
+      </svg>
+      Location Search
+    </h1>
+    <p class="text-gray-600 text-lg">
+      Search for India to see all popular hotels with destination
+    </p>
+  </div>
+
+  <!-- Search Component -->
+  <div class="relative mb-8">
+    <!-- Search Input -->
+    <div class="relative">
+      <input
+        #searchInput
+        type="text"
+        [formControl]="searchControl"
+        (focus)="onSearchFocus()"
+        (blur)="onSearchBlur()"
+        (keydown)="onKeyDown($event)"
+        placeholder="Search locations..."
+        class="w-full px-4 py-3 pl-12 pr-10 text-lg border-2 border-gray-300 rounded-xl focus:border-blue-500 focus:outline-none transition-all duration-200 shadow-sm"
+        autocomplete="off"
+      />
+
+      <!-- Search Icon -->
+      <svg
+        class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400"
+        fill="currentColor"
+        viewBox="0 0 20 20"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+          clip-rule="evenodd"
+        ></path>
+      </svg>
+
+      <!-- Clear Button -->
+      <button
+        *ngIf="searchControl.value"
+        (click)="clearSearch()"
+        class="absolute right-3 top-1/2 transform -translate-y-1/2 w-6 h-6 text-gray-400 hover:text-gray-600 transition-colors"
+      >
+        <svg fill="currentColor" viewBox="0 0 20 20">
+          <path
+            fill-rule="evenodd"
+            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+            clip-rule="evenodd"
+          ></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Suggestions Dropdown -->
+    <div
+      *ngIf="isDropdownOpen && filteredLocations.length > 0"
+      class="absolute top-full left-0 right-0 bg-white border border-gray-200 rounded-xl shadow-lg z-50 mt-2 max-h-96 overflow-y-auto"
+    >
+      <div
+        *ngFor="let location of filteredLocations; let i = index"
+        (click)="selectSuggestion(location, i)"
+        [class]="
+          'p-3 hover:bg-gray-50 cursor-pointer border-b border-gray-100 last:border-b-0 transition-colors duration-150 ' +
+          (i === highlightedIndex ? 'bg-blue-50' : '')
+        "
+      >
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div
+              class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center text-sm"
+            >
+              {{ getLocationIcon(location.country) }}
+            </div>
+            <div>
+              <div class="font-medium text-gray-900">{{ location.name }}</div>
+              <div class="text-sm text-gray-500">
+                {{ location.country }} • {{ location.region }}
+              </div>
+            </div>
+          </div>
+          <div class="text-right text-xs text-gray-400 font-mono">
+            {{ location.lat | number : "1.2-2" }},
+            {{ location.lng | number : "1.2-2" }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- No Results Message -->
+    <div
+      *ngIf="
+        isDropdownOpen && filteredLocations.length === 0 && searchControl.value
+      "
+      class="absolute top-full left-0 right-0 bg-white border border-gray-200 rounded-xl shadow-lg z-50 mt-2"
+    >
+      <div class="p-4 text-center text-gray-500">
+        <svg
+          class="w-8 h-8 mx-auto mb-2 text-gray-300"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+            clip-rule="evenodd"
+          ></path>
+        </svg>
+        No locations found
+      </div>
+    </div>
+  </div>
+
+  <!-- Results Section -->
+  <div *ngIf="showResults && filteredLocations.length > 0">
+    <!-- Results count -->
+    <div class="mb-4">
+      <p class="text-gray-600">
+        Found {{ filteredLocations.length }} location{{
+          filteredLocations.length !== 1 ? "s" : ""
+        }}
+      </p>
+    </div>
+
+    <!-- Location Cards Grid -->
+    <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <div
+        *ngFor="let location of filteredLocations"
+        (click)="selectLocation(location)"
+        class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow duration-200 cursor-pointer"
+      >
+        <div class="flex items-start justify-between mb-3">
+          <div class="flex items-center gap-2">
+            <div class="text-2xl">{{ getLocationIcon(location.country) }}</div>
+            <h3 class="font-semibold text-gray-900">{{ location.name }}</h3>
+          </div>
+          <span
+            [class]="
+              'text-xs px-2 py-1 rounded-full ' + getTypeColor(location.country)
+            "
+            >{{ location.country }}</span
+          >
+        </div>
+        <p class="text-sm text-gray-600 mb-3">{{ location.region }}</p>
+        <div class="flex items-center justify-between">
+          <div class="text-xs font-mono text-gray-500">
+            {{ location.lat | number : "1.4-4" }},
+            {{ location.lng | number : "1.4-4" }}
+          </div>
+          <button
+            (click)="copyCoordinates(location.lat, location.lng, $event)"
+            class="text-xs text-blue-600 hover:text-blue-800 px-2 py-1 rounded hover:bg-blue-50 transition-colors"
+          >
+            Copy
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Selected Location Details -->
+  <div
+    *ngIf="selectedLocation"
+    class="mt-8 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-2xl p-6 shadow-xl"
+  >
+    <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+      <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+        <path
+          fill-rule="evenodd"
+          d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z"
+          clip-rule="evenodd"
+        ></path>
+      </svg>
+      Selected Location
+    </h2>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      <div>
+        <h3 class="text-lg font-semibold mb-2">Location Details</h3>
+        <div class="space-y-2">
+          <div>
+            <strong>Name:</strong> {{ selectedLocation[0].location[0].name }}
+          </div>
+          <div>
+            <strong>country:</strong>
+            {{ selectedLocation[0].location[0].country }}
+          </div>
+          <div>
+            <strong>Region:</strong>
+            {{ selectedLocation[0].location[0].region }}
+          </div>
+          <div><strong>Hotel:</strong> {{ selectedLocation[0].title }}</div>
+          <div>
+            <strong>Latitude:</strong>
+            {{
+              selectedLocation[0].geometry?.coordinates[0] | number : "1.6-6"
+            }}
+          </div>
+          <div>
+            <strong>Longitude:</strong>
+            {{
+              selectedLocation[0].geometry?.coordinates[1] | number : "1.6-6"
+            }}
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-lg font-semibold mb-2">
+          Best Hotel in selected location
+        </h3>
+        <div class="bg-white/20 rounded-lg p-4 backdrop-blur-sm">
+          <div class="space-y-2 text-sm">
+            <app-place-card
+              *ngFor="let card of selectedLocation"
+              [images]="card.images"
+              ParentClass="hover:shadow-xl transition-all duration-100 ease-in-out "
+              i
+              card="h-[250px] w-full rounded"
+            ></app-place-card>
+          </div>
+          <button
+            (click)="
+              copyCoordinates(
+                selectedLocation[0].geometry?.coordinates[0],
+                selectedLocation[0].geometry?.coordinates[1]
+              )
+            "
+            class="w-full mt-3 bg-white/20 hover:bg-white/30 border border-white/30 text-white px-4 py-2 rounded-lg transition-colors text-sm"
+          >
+            Copy Coordinates
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

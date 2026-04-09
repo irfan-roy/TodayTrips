@@ -1,0 +1,10 @@
+.card > img {
+  @apply rounded-full;
+}
+::ng-deep .card app-place-card img {
+  @apply rounded-s-xl;
+}
+
+.container {
+  color: black;
+}

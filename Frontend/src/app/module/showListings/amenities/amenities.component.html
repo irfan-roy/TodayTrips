@@ -1,0 +1,12 @@
+<div class="w-1/2 mb-10">
+  <h1 class="text-2xl my-6 font-semibold">Popular amenities</h1>
+  <div class="amenities grid grid-cols-2 gap-8">
+    <div
+      *ngFor="let amen of amenities"
+      class="flex items-center gap-4 text-lg font-normal"
+    >
+      <i [class]="amen.icon"></i>
+      <span>{{ amen.name }}</span>
+    </div>
+  </div>
+</div>

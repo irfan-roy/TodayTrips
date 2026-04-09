@@ -1,0 +1,21 @@
+<div>
+  <p class="text-xl mt-2">The room</p>
+  <button
+    (click)="toggle()"
+    class="border-[1px] border-[#ccc] py-2 px-4 mt-2 rounded-xl"
+  >
+    See more
+  </button>
+
+  <app-toggle-show *ngIf="display">
+    <div class="other_thing" *ngFor="let detail of information">
+      <h1 class="my-4 text-xl font-semibold">{{ detail.name }}</h1>
+
+      <div>
+        <p class="mb-6" *ngFor="let point of detail.info">
+          {{ point }}
+        </p>
+      </div>
+    </div>
+  </app-toggle-show>
+</div>

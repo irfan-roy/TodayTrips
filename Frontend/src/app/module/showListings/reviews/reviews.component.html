@@ -1,0 +1,27 @@
+<div class="grid grid-cols-1 gap-16 w-full" [ngClass]="class">
+  <div *ngFor="let r of reviews">
+    <div class="flex gap-4">
+      <img
+        [src]="r.img"
+        [alt]="r.user"
+        class="w-14 rounded-full h-14 object-cover"
+      />
+      <div>
+        <p class="text-lg font-semibold">{{ r.user }}</p>
+        <span class="font-">{{ r.join }}</span>
+      </div>
+    </div>
+
+    <div class="mt-1">
+      <p class="flex gap-1 font-semibold">
+        <p-rating
+          [(ngModel)]="r.rating"
+          [readonly]="true"
+          style="color: black"
+        />·
+        {{ r.time }}
+      </p>
+      <p class="font-normal">{{ r.review }}</p>
+    </div>
+  </div>
+</div>

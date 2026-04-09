@@ -1,0 +1,23 @@
+<div
+  class="w-[27rem] max-sm:w-[18rem] mx-auto border-[1px] border-gray-400 rounded-xl my-4 overflow-hidden hover:shadow-xl transition-shadow duration-300"
+  (click)="onCardClick()"
+>
+  <!-- Image Container -->
+  <div class="w-full sm:w-full h-[20rem] overflow-hidden">
+    <img
+      [src]="blog?.image_url"
+      alt="santorini"
+      class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+    />
+  </div>
+
+  <!-- Content Container -->
+  <div class="space-y-2 p-4">
+    <h1 class="text-lg font-bold text-gray-900 line-clamp-1">
+      {{ blog?.headline }}
+    </h1>
+    <p class="text-gray-600 text-sm leading-relaxed line-clamp-2">
+      {{ blog?.description }}
+    </p>
+  </div>
+</div>

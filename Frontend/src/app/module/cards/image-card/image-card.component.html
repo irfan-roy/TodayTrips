@@ -1,0 +1,21 @@
+<div
+  class="container h-[24rem] w-72 relative group overflow-hidden rounded-3xl"
+>
+  <img
+    class="h-full w-full object-cover rounded-3xl border border-gray-200 transition-transform duration-300 group-hover:scale-110"
+    [src]="imageUrl"
+    alt="dubai"
+  />
+
+  <div
+    class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent rounded-3xl"
+  ></div>
+
+  <!-- Button with routerLink -->
+  <button
+    [routerLink]="['/listing']"
+    class="absolute bottom-6 left-5 bg-white/90 backdrop-blur-sm shadow-lg px-4 py-2 font-semibold border border-white/20 rounded-full text-gray-800 hover:bg-white hover:shadow-xl transition-all duration-300 block"
+  >
+    {{ Place }}
+  </button>
+</div>

@@ -1,0 +1,84 @@
+<div class="">
+  <div *ngIf="display" class="details">
+    <div class="relative">
+      <button
+        (click)="toggle()"
+        class="absolute top-2 left-5 text-2xl font-bold"
+      >
+        &times;
+      </button>
+    </div>
+
+    <div class="w-[25rem] p-4 rounded-lg border shadow">
+      <!-- Selected Dates -->
+      <div
+        class="my-4 text-sm text-gray-700 flex bg-[#ccc] p-[1px] rounded-lg w-64 ml-12"
+      >
+        <button
+          #startBtn
+          class="p-2 w-32 rounded-lg text-start white"
+          (click)="startFun('start')"
+        >
+          <strong>Start:</strong>
+          <br />
+          {{ startDate ? (startDate | date : "mediumDate") : "—" }}
+        </button>
+        <button
+          #endBtn
+          class="p-2 w-32 rounded-lg text-start"
+          (click)="startFun('end')"
+        >
+          <strong>End:</strong>
+          <br />
+          {{ endDate ? (endDate | date : "mediumDate") : "—" }}
+        </button>
+      </div>
+      <!-- Month Controls -->
+      <div class="flex items-center justify-between mb-2">
+        <button (click)="prevMonth()" class="text-lg px-2 hover:text-blue-600">
+          ←
+        </button>
+        <h2 class="text-lg font-semibold text-center">
+          {{ monthNames[currentMonth] }} {{ currentYear }}
+        </h2>
+        <button (click)="nextMonth()" class="text-lg px-2 hover:text-blue-600">
+          →
+        </button>
+      </div>
+
+      <!-- Weekday Headers -->
+      <div
+        class="grid grid-cols-7 gap-1 text-center font-medium text-gray-600 mb-2"
+      >
+        <div>Su</div>
+        <div>Mo</div>
+        <div>Tu</div>
+        <div>We</div>
+        <div>Th</div>
+        <div>Fr</div>
+        <div>Sa</div>
+      </div>
+
+      <!-- Dates Grid -->
+      <div class="grid grid-cols-7 gap-1 text-center">
+        <ng-container *ngFor="let blank of [].constructor(getFirstDayOffset())">
+          <div></div>
+        </ng-container>
+
+        <ng-container *ngFor="let day of daysInMonth">
+          <div
+            class="p-2 cursor-pointer"
+            [ngClass]="{
+              'bg-blue-500 text-white': isSelected(day),
+              'bg-blue-100': isInRange(day),
+              'hover:bg-blue-200': !isSelected(day)
+            }"
+            (click)="onDateClick(day)"
+          >
+            {{ day.getDate() }}
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

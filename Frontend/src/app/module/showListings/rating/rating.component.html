@@ -1,0 +1,11 @@
+<div class="flex mt-2 items-center" *ngIf="review">
+  <span
+    class="text-xs font-bold bg-green-700 text-white rounded h-6 px-[7px] p-1 mr-1 flex items-center"
+  >
+    {{ review?.rating }}
+  </span>
+  <div>
+    <p class="text-sm leading-[5px] font-semibold">{{ review?.review }}</p>
+    <span class="text-xs font-normal">{{ review?.number }} reviews</span>
+  </div>
+</div>

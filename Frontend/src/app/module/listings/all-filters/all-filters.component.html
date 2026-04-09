@@ -1,0 +1,52 @@
+<div class="f_container flex flex-col hidden lg:block">
+  <app-map [listing]="listing" class="z-10"></app-map>
+
+  <div class="hidden lg:block">
+    <h1 class="text-2xl font-semibold">Filter By</h1>
+
+    <ng-container *ngFor="let filter of allFilters; let i = index">
+      <app-check-filter
+        *ngIf="i < 6"
+        class="mt-[-1.1rem]"
+        [propertyTypes]="filter.options"
+        [filterName]="filter.title"
+        (selectedFilters)="checkboxFilter.emit($event)"
+      ></app-check-filter>
+    </ng-container>
+
+    <div class="w-64">
+      <app-prices
+        (minChange)="onMinChange($event)"
+        (maxChange)="onMaxChange($event)"
+      ></app-prices>
+    </div>
+
+    <app-category
+      (SelectCategoryFilter)="categoryFilter.emit($event)"
+    ></app-category>
+
+    <ng-container *ngFor="let filter of allFilters; let i = index">
+      <app-check-filter
+        *ngIf="i >= 6"
+        class="mt-[-1.1rem]"
+        [propertyTypes]="filter.options"
+        [filterName]="filter.title"
+        (selectedFilters)="checkboxFilter.emit($event)"
+      ></app-check-filter>
+    </ng-container>
+  </div>
+</div>
+
+<div class="w-full mt-4 px-3 md:block lg:hidden">
+  <div
+    class="flex overflow-x-auto gap-4 px-4 scroll-smooth filter-scroll-container"
+  >
+    <app-select-filter
+      *ngFor="let filter of allFilters"
+      [propertyTypes]="filter.options"
+      [filterName]="filter.title"
+      class="flex-shrink-0"
+    >
+    </app-select-filter>
+  </div>
+</div>

@@ -1,0 +1,94 @@
+<div class="p-4">
+  <h1 class="font-semibold text-normal">{{ extras[0].name }}</h1>
+
+  <div>
+    <div
+      class="flex justify-between gap-5 font-medium text-sm"
+      *ngFor="let extra of extras[0].info"
+    >
+      <label class="flex items-center gap-2 cursor-pointer my-1">
+        <input type="checkbox" class="hidden peer" />
+        <div
+          class="w-4 h-4 rounded-full border-2 border-gray-400 peer-checked:bg-blue-600 peer-checked:border-blue-600 transition"
+        ></div>
+        <span class="text-gray-700">{{ extra.name }}</span>
+      </label>
+
+      <p class="font-normal">{{ extra.price }}</p>
+    </div>
+
+    <div>
+      <app-price
+        [originalPrice]="originalPrice"
+        [nights]="nights"
+        [days]="days"
+        reserve="reserve"
+        [display]="display"
+        (displayChange)="toggle($event)"
+        value="display"
+        [data]="TravelData[0]"
+      ></app-price>
+    </div>
+  </div>
+</div>
+
+<!-- payment section -->
+<app-toggle-show Toggle="" *ngIf="display">
+  <div class="flex items-center gap-1">
+    <i class="fa-solid fa-check"></i>
+    <p class="text-xs my-2">Fully refundable before Wed, 8 Oct</p>
+  </div>
+  <div class="flex gap-4">
+    <div class="border p-3 rounded-2xl w-[70rem] flex flex-col justify-between">
+      <h1>Pay when you stay</h1>
+      <ul class="list-disc p-3">
+        <li>Pay directly they are preferred currency (INR)</li>
+        <li>
+          Please note that TodayTrip will not issue a tax invoice. You will
+          receive a commercial receipt for the purpose of the transaction. Upon
+          request, a tax invoice would be issued by the property
+        </li>
+      </ul>
+
+      <app-price
+        [originalPrice]="originalPrice"
+        [nights]="nights"
+        [days]="days"
+        dayClass="text-transparent"
+        reserve="reserve"
+        buttonName="Pay at property"
+        payInfo="You will not be charged until your stay"
+        [id]="offer._id"
+        value="payment"
+        [offer]="offer"
+        [data]="TravelData[0]"
+      ></app-price>
+    </div>
+
+    <div class="border p-3 rounded-2xl w-[70rem] flex flex-col justify-between">
+      <h1>Pay</h1>
+      <ul class="list-disc p-3">
+        <li>You can use a valid TodayTrip coupon</li>
+        <li>We will process your payment in your local currency</li>
+        <li>
+          Please note that TodayTrip will not issue a tax invoice. You will
+          receive a commercial receipt for the purpose of the transaction
+        </li>
+      </ul>
+
+      <app-price
+        [originalPrice]="originalPrice"
+        [nights]="nights"
+        [days]="days"
+        dayClass="text-transparent"
+        reserve="reserve"
+        buttonName="Pay now"
+        payInfo="You will be charged yet"
+        [id]="offer._id"
+        value="payment"
+        [offer]="offer"
+        [data]="TravelData[0]"
+      ></app-price>
+    </div>
+  </div>
+</app-toggle-show>

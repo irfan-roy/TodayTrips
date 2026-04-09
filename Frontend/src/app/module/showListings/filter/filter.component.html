@@ -1,0 +1,15 @@
+<div class="flex px-2 w-full">
+  <button
+    *ngFor="let filter of filters"
+    (click)="selectFilter(filter)"
+    class="px-4 py-2 text-sm font-medium transition-all duration-200 class border-b-2 hover:border-black"
+    [ngClass]="{
+      'text-blue-600 border-blue-500 class': selectedFilter === filter,
+      'class hover:border-black': selectedFilter !== filter
+    }"
+    [ngClass]="selectedFilter === filter ? 'text-blue-600 border-blue-500' : ''"
+    [class]="btnClass"
+  >
+    {{ filter }}
+  </button>
+</div>

@@ -1,0 +1,46 @@
+<div
+  class="group container flex border w-full max-w-[47rem] lg:w-[47rem] rounded-2xl my-6 cursor-pointer border-gray-300 hover:shadow-xl hover:scale-[1.02] transition-all duration-200 ease-in-out relative"
+>
+  <div class="card">
+    <app-place-card [images]="listing.images" card="h-[216px] w-[341px]">
+    </app-place-card>
+  </div>
+  <div
+    class="flex justify-between flex-col p-2 w-full h-full"
+    (click)="handleListingId(listing._id)"
+  >
+    <section class="h-full flex flex-col justify-between">
+      <div>
+        <h1 class="place text-xl font-semibold">{{ listing.title }}</h1>
+        <h2 class="location" *ngFor="let loc of listing.location">
+          {{ loc.name }}, {{ loc.country }}
+        </h2>
+      </div>
+
+      <!-- <p class="text-sm">
+      {{ listing.description }}
+    </p> -->
+
+      <div class="leading-3 text-bottom mt-8">
+        <p class="text-sm font-semibold">{{ listing.provides[0] }}</p>
+        <span class="text-xs leading-2">{{ listing.provides[1] }}</span>
+      </div>
+    </section>
+
+    <div class="flex justify-between">
+      <app-rating [review]="listing.ratings" class="mt-2"></app-rating>
+      <app-price
+        class="text-3xl"
+        [originalPrice]="listing.price"
+        [nights]="2"
+      ></app-price>
+    </div>
+  </div>
+  <button class="absolute right-5 top-4" (click)="handleFavorite(listing)">
+    <i
+      class="fa-solid fa-heart text-2xl p-2 opacity-0 group-hover:opacity-100 ease transition-all active:bg-gray-100 active:text-red-500 border rounded-full hover:shadow-[inset_0_2px_8px_rgba(0,0,0,0.1)] hover:shadow-xl hover:shadow-black-xl"
+    ></i>
+  </button>
+</div>
+
+<!-- favorite -->

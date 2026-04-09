@@ -1,0 +1,62 @@
+<div class="relative my-8 w-full h-[27rem] overflow-hidden shadow-xl">
+  <div class="relative w-full h-full">
+    <div
+      *ngFor="let img of images; let i = index"
+      class="absolute inset-0 transition-all duration-1000 ease-in-out"
+      [ngClass]="{
+        'opacity-100 z-20 scale-100': i === currentIndex,
+        'opacity-0 z-10 scale-110': i !== currentIndex
+      }"
+    >
+      <!-- Image with Ken Burns effect -->
+      <img
+        [src]="img.url"
+        class="w-full h-full object-cover transition-transform duration-[7000ms] ease-linear"
+        [class.scale-110]="i === currentIndex"
+      />
+
+      <!-- Gradient Overlay -->
+      <div
+        class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"
+      ></div>
+
+      <!-- Text Overlay with staggered animation -->
+      <div
+        class="absolute bottom-0 left-0 right-0 p-8 transform transition-all duration-700"
+        [ngClass]="{
+          'translate-y-0 opacity-100': i === currentIndex,
+          'translate-y-8 opacity-0': i !== currentIndex
+        }"
+      >
+        <p
+          class="text-4xl md:text-5xl font-bold text-white drop-shadow-2xl mb-2 leading-tight"
+        >
+          {{ img.text }}
+        </p>
+        <div
+          class="w-20 h-1 bg-white/80 transition-all duration-500 delay-200"
+          [ngClass]="{
+            'w-20 opacity-100': i === currentIndex,
+            'w-0 opacity-0': i !== currentIndex
+          }"
+        ></div>
+      </div>
+    </div>
+
+    <!-- Navigation Dots -->
+    <!-- <div
+      class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 z-30"
+    >
+      <button
+        *ngFor="let img of images; let i = index"
+        (click)="goToSlide(i)"
+        class="w-2 h-2 rounded-full transition-all duration-300"
+        [ngClass]="{
+          'bg-white w-8': i === currentIndex,
+          'bg-white/50 hover:bg-white/75': i !== currentIndex
+        }"
+        [attr.aria-label]="'Go to slide ' + (i + 1)"
+      ></button>
+    </div> -->
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<div class="border-2 rounded-3xl shadow-md p-6 w-[25rem]">
+  <div class="flex gap-4">
+    <img
+      [src]="r.img"
+      [alt]="r.user"
+      class="w-14 rounded-full h-14 object-cover"
+    />
+    <div>
+      <p class="text-lg font-semibold">{{ r.user }}</p>
+      <span class="font-base">{{ r.join }} of TodayTrip</span>
+    </div>
+  </div>
+
+  <div class="mt-1">
+    <p class="flex gap-1 font-semibold">
+      <p-rating [(ngModel)]="value" [readonly]="true" style="color: black" />·
+      {{ r.time }}
+    </p>
+    <p class="font-normal">{{ r.review }}</p>
+  </div>
+</div>

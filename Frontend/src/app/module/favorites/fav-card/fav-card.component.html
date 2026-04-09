@@ -1,0 +1,149 @@
+<div>
+  <div
+    class="border md:w-[47rem] lg:w-[54rem] p-4 rounded-xl relative my-4"
+    *ngFor="let favorite of favorites"
+  >
+    <section>
+      <!-- host details -->
+      <div class="flex justify-between items-center">
+        <div class="flex items-center gap-4">
+          <!--host image -->
+          <img
+            src="/image/user.jpg"
+            alt=""
+            class="objact-cover h-14 w-14 rounded-full"
+          />
+
+          <!-- host details -->
+          <div class="text-center">
+            <p class="text-2xl">Sonam</p>
+            <p class="text-xs">Superhost</p>
+          </div>
+
+          <!-- host review -->
+
+          <div class="text-xs flex gap-1 items-center mb-2">
+            <i class="fa-solid fa-star"></i>
+            <p>4.83 (99)</p>
+          </div>
+        </div>
+
+        <div
+          class="flex gap-1 cursor-pointer p-2 rounded-xl hover:bg-gray-200 :opacity-70 active:scale-90 transition duration-200 ease-in"
+          (click)="toggle()"
+        >
+          <div class="bg-gray-600 size-1 rounded-full"></div>
+          <div class="bg-gray-600 size-1 rounded-full"></div>
+          <div class="bg-gray-600 size-1 rounded-full"></div>
+        </div>
+      </div>
+
+      <!-- toggle -->
+      <div class="absolute top-5 right-14 bg-white" *ngIf="display">
+        <div class="border rounded-xl flex flex-col shadow-lg text-sm">
+          <button class="rounded-t-xl border-b btn">Go To host Hotel</button>
+          <button class="border-b btn">Apply offer's</button>
+          <button class="border-b btn">Removed favorite</button>
+          <button
+            class="p-2 rounded-b-xl text-red-500 font-medium !impoorted hover:bg-red-200 transition-all duration-100 ease-in"
+          >
+            Cancel Booking
+          </button>
+        </div>
+      </div>
+
+      <!-- handle toggle -->
+      <button
+        class="absolute right-[12rem] top-5"
+        (click)="toggle()"
+        *ngIf="display"
+      >
+        <span class="">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="40px"
+            width="40px"
+            fill="#cc"
+            class="p-2 hover:bg-gray-200 rounded-full"
+          >
+            <path
+              d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"
+            />
+          </svg>
+        </span>
+      </button>
+    </section>
+
+    <section>
+      <div class="my-4 flex justify-between">
+        <div class="flex gap-4">
+          <!-- hotel image -->
+          <img
+            [src]="favorite.images[0]"
+            alt=""
+            class="object-conver h-44 w-72 rounded-xl"
+          />
+
+          <!-- hotel-details -->
+          <div class="">
+            <h1 class="">
+              {{ favorite.title }} ( {{ favorite.location[0].name }},
+              {{ favorite.location[0].country }})
+            </h1>
+
+            <!-- room -->
+            <ul class="flex text-sm mt-6">
+              <p class="font-semibold">Room 1:</p>
+              <li>&nbsp;2 Adults,</li>
+              <li>&nbsp;1 King Bed,</li>
+              <li>&nbsp;Non-smoking</li>
+            </ul>
+
+            <!-- room -->
+            <ul class="flex text-green-500 text-sm flex">
+              <li *ngFor="let prov of favorite.provides">&nbsp;{{ prov }} -</li>
+            </ul>
+
+            <p class="text-sm text-red-500 my-4">
+              In 4 favourites, 2 booked in the past 2 days
+            </p>
+
+            <div class="flex text-sm">
+              <button
+                class="py-2 px-4 rounded-full hover:bg-gray-200 transition-all duration-100 ease-in"
+              >
+                Edit
+              </button>
+              <button
+                class="py-2 px-4 rounded-full hover:bg-gray-200 transition-all duration-100 ease-in"
+              >
+                Save for later
+              </button>
+              <button
+                class="py-2 px-4 rounded-full hover:bg-gray-200 transition-all duration-100 ease-in"
+              >
+                Remove
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- price -->
+
+        <div class="text-center text-green-600 text-xl">
+          <p class="font-semibold">₹{{ favorite.price }}</p>
+          <p class="text-xs override mr-2 line-through text-black">₹26,880</p>
+        </div>
+      </div>
+    </section>
+
+    <hr />
+
+    <section>
+      <div class="flex mt-3 items-center h-full gap-2">
+        <p>Date :</p>
+        <p>₹{{ favorite.price }}</p>
+        <p>(Fri Nov 14 2025 → Mon Nov 24 2025)</p>
+      </div>
+    </section>
+  </div>
+</div>

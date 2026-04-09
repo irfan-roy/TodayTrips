@@ -1,0 +1,50 @@
+<div>
+  <div class="mt-4 text-xs font-normal flex justify-between items-end">
+    <p class="text-red-600 font-semibold" [ngClass]="dayClass" *ngIf="days">
+      We have {{ days }} left
+    </p>
+
+    <div class="text-start">
+      <div class="basic_p flex items-center">
+        <span class="text-lg font-semibold"
+          >₹{{ discountedPrice | number : "1.0-0" }}</span
+        >
+        <span class="underline underline-offset-1 text-sm ml-1 line-through"
+          >₹{{ originalPrice | number : "1.0-0" }}</span
+        >
+      </div>
+      <p>₹{{ total | number : "1.0-0" }} total</p>
+      <p>includes taxes & fees</p>
+    </div>
+  </div>
+
+  <div class="text-center mt-3" *ngIf="reserve">
+    <!-- Display button -->
+    <div *ngIf="value === 'display'">
+      <button
+        class="p-2 bg-blue-500 text-white font-semibold w-full rounded-full hover:bg-blue-600 focus:outline-2 focus:outline-offset-2 focus:outline-blue-500 active:bg-blue-700"
+        (click)="send('display')"
+      >
+        {{ buttonName || "Reserve" }}
+      </button>
+    </div>
+
+    <!-- Payment button -->
+    <div *ngIf="value === 'payment' && id">
+      <button
+        class="p-2 bg-blue-500 text-white font-semibold w-full rounded-full hover:bg-blue-600 focus:outline-2 focus:outline-offset-2 focus:outline-blue-500 active:bg-blue-700"
+        (click)="send('payment', id)"
+      >
+        {{ buttonName || "Reserve" }}
+      </button>
+      <p class="text-xs mt-1">
+        {{ payInfo || "You will not be charged yet" }}
+      </p>
+    </div>
+
+    <!-- Error state when payment is requested but no ID -->
+    <div *ngIf="value === 'payment' && !id" class="text-red-600 text-sm">
+      <p>Unable to proceed - missing listing ID</p>
+    </div>
+  </div>
+</div>

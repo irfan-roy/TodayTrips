@@ -1,0 +1,3 @@
+.details {
+  @apply absolute  transform -translate-x-[-24rem] -translate-y-[34rem] border shadow-xl rounded-3xl w-[40rem] h-[35rem] bg-white;
+}

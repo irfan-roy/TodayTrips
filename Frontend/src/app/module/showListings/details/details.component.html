@@ -1,0 +1,38 @@
+<div class="my-2 p-4 space-y-6 divide-y divide-gray-200">
+  <section>
+    <app-room></app-room>
+  </section>
+
+  <section>
+    <app-show-amenities></app-show-amenities>
+  </section>
+
+  <section>
+    <app-choose-room [offers]="offers"></app-choose-room>
+  </section>
+
+  <section>
+    <app-policies></app-policies>
+  </section>
+
+  <section>
+    <app-similar [similar]="offers"></app-similar>
+  </section>
+
+  <section class="flex items-center justify-center rating_review gap-4">
+    <app-rating-review class="text-6xl my-2"></app-rating-review>
+  </section>
+
+  <section>
+    <app-review-container class="my-5"></app-review-container>
+  </section>
+
+  <section>
+    <app-reviews class="grid-cols-2 mt-6"></app-reviews>
+    <app-all-reviews></app-all-reviews>
+  </section>
+
+  <section>
+    <app-host></app-host>
+  </section>
+</div>

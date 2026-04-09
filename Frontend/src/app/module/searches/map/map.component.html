@@ -1,0 +1,26 @@
+<div>
+  <!-- Small preview map -->
+  <div class="w-[272px] border border-gray-300 rounded-xl z-0">
+    <div
+      id="mapPreview"
+      style="height: 120px; width: 270px"
+      class="rounded-t-xl"
+    ></div>
+
+    <button
+      class="map_text text-center w-full text-blue-600 border-t border-gray-300 font-semibold bg-gradient-to-r from-blue-50 to-indigo-50 rounded-b-xl border border-blue-200 animate-fade-in hover:underline p-2"
+      (click)="toggle()"
+    >
+      View in a map
+    </button>
+  </div>
+
+  <!-- Expanded map -->
+  <app-toggle-show class="z-50" *ngIf="display">
+    <div
+      id="mapExpanded"
+      style="height: 540px; width: inherit"
+      class="rounded-xl mt-4"
+    ></div>
+  </app-toggle-show>
+</div>

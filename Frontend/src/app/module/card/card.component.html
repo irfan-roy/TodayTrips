@@ -1,0 +1,29 @@
+<!-- <a routerLink="/listings">listings</a> -->
+<div
+  class="group card border rounded-2xl p-2 border-transparent my-6 cursor-pointer"
+>
+  <div class="h-40 w-[17rem] rounded-t-xl overflow-hidden">
+    <img
+      [src]="imageUrl"
+      alt="Place image"
+      class="object-cover h-full w-full"
+    />
+  </div>
+
+  <!-- Right Side - Information (50%) -->
+  <div class="p-2 flex flex-col justify-between bg-white border rounded-b-xl">
+    <div>
+      <p class="font-semibold text-lg font-bold">{{ country }}</p>
+      <h2 class="text-sm font-base">{{ place }}</h2>
+    </div>
+    <div class="mt-2">
+      <p class="font-semibold text-xl">
+        <!-- <span class="font-semibold">Price</span> -->
+        ₹{{ price }}
+      </p>
+      <p class="text-sm">
+        <span class="">avg nightly price</span>
+      </p>
+    </div>
+  </div>
+</div>

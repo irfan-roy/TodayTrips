@@ -1,0 +1,32 @@
+<app-slider heading="Similar items be like">
+  <div class="flex gap-4 my-3">
+    <div *ngFor="let offer of offers" class="w-[240px] border rounded-2xl">
+      <app-place-card
+        [images]="[offer.images[0]]"
+        card="h-[183px] w-[241n54epx] rounded-t-2xl"
+      ></app-place-card>
+
+      <div class="info p-2">
+        <h1 class="text-sm font-semibold">{{ offer.title }}</h1>
+        <h2>{{ offer.place }}</h2>
+
+        <!-- Amenities -->
+        <div class="amenities flex flex-col gap-2 my-3 mb-4">
+          <div
+            *ngFor="let amen of offer.amenities | slice : 0 : 3"
+            class="flex items-center gap-2"
+          >
+            <i [class]="amen.icon"></i>
+            <span class="text-xs">{{ amen.name }}</span>
+          </div>
+        </div>
+
+        <app-rating [review]="ratings[0]"></app-rating>
+      </div>
+
+      <div class="flex justify-end w-full p-2">
+        <app-price [originalPrice]="offer.price" [nights]="2"></app-price>
+      </div>
+    </div>
+  </div>
+</app-slider>

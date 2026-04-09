@@ -1,0 +1,52 @@
+<div class="px-20 pb-4 mt-12">
+  <app-main-slider class="mt-8"></app-main-slider>
+
+  <app-slider [heading]="country">
+    <app-card
+      *ngFor="let card of listings"
+      [imageUrl]="card.images[0]"
+      [country]="card.location[0].country"
+      [place]="card.location[0].name"
+      [price]="card.price"
+    >
+    </app-card>
+  </app-slider>
+  <app-image-slider
+    [heading]="image_card_heading"
+    [imageCard]="image_cards"
+  ></app-image-slider>
+
+  <app-ads></app-ads>
+
+  <app-image-ad [ads]="ad"></app-image-ad>
+  <app-holidays [places]="listings"></app-holidays>
+  <app-promotion></app-promotion>
+
+  <div
+    class="h-[48rem] w-full bg-[url('https://i.postimg.cc/ZnZrFRhG/traveling-with-off-road-car.jpg')] bg-cover bg-center flex flex-col justify-center rounded-3xl p-2"
+  >
+    <app-heading
+      heading="Explore holiday packages to popular destinations"
+      text="
+      Prices found in the past 48 hours, based on two adults. Prices/availability subject to change. Click for updated prices
+      "
+    ></app-heading>
+
+    <app-filter
+      [filters]="winterFilters"
+      [places]="listings"
+      (filteredData)="handleFilteredData($event)"
+    ></app-filter>
+    <app-place-slider
+      [cards]="filteredPlaces"
+      class="text-white"
+    ></app-place-slider>
+  </div>
+  <app-place-slider
+    heading="Explore holiday packages to popular destinations"
+    text="
+      Prices found in the past 48 hours, based on two adults. Prices/availability subject to change. Click for updated prices
+      "
+    [cards]="listings"
+  ></app-place-slider>
+</div>

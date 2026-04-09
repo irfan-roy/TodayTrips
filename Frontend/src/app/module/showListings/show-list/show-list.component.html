@@ -1,0 +1,58 @@
+<div class="px-3 sm:px-3 md:px-10 lg:px-28 my-4" *ngIf="listings as item">
+  <app-show-image
+    [imageInfo]="item.imageInfo"
+    [images]="item.images"
+  ></app-show-image>
+
+  <div *ngFor="let detail of item.rooms_details">
+    <h1 class="text-xl font-semibold">
+      {{ detail?.title }}
+    </h1>
+
+    <app-rating [review]="item.ratings"></app-rating>
+
+    <p class="text-blue-400 text-sm font-semibold">
+      See all {{ detail?.reviewCount ?? 356 }} reviews &#8250;
+    </p>
+
+    <div class="flex gap-2 my-6">
+      <img
+        src="/image/user.jpg"
+        alt="profile"
+        class="h-14 w-14 bg-cover rounded-full"
+      />
+      <div>
+        <p class="text-lg font-semibold">
+          Hosted by {{ detail?.hostName ?? "love" }}
+        </p>
+        <p>{{ detail?.hostType ?? "Superhost · 2 years hosting" }}</p>
+      </div>
+    </div>
+
+    <hr />
+
+    <section
+      *ngFor="let amen of detail.room_amenities"
+      class="flex items-center gap-4 my-5"
+    >
+      <i [ngClass]="amen.icon" class="text-2xl"></i>
+      <div>
+        <p class="font-semibold">{{ amen.title }}</p>
+        <p>{{ amen.description }}</p>
+      </div>
+    </section>
+
+    <hr />
+
+    <div class="my-5">
+      <p class="description">{{ detail?.description }}</p>
+      <p class="mt-2 mb-1 text-xl font-semibold">Languages</p>
+      <p class="text-sm">English, Hindi</p>
+      <app-see-more></app-see-more>
+    </div>
+
+    <hr />
+
+    <app-details [offers]="item?.offers"></app-details>
+  </div>
+</div>

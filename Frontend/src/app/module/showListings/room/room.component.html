@@ -1,0 +1,15 @@
+<div class="my-10 max-w-5xl">
+  <h1 class="text-2xl font-semibold my-4">Where you'll sleep</h1>
+
+  <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <div *ngFor="let r of infos" class="space-y-2">
+      <img
+        [src]="r.img"
+        [alt]="r.name"
+        class="h-56 w-full object-cover rounded-xl shadow"
+      />
+      <h2 class="text-lg font-semibold">{{ r.name }}</h2>
+      <p class="text-gray-600">{{ r.info }}</p>
+    </div>
+  </div>
+</div>

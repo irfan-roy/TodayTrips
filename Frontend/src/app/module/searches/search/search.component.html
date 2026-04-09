@@ -1,0 +1,47 @@
+<div class="p-2 px-3">
+  <div
+    class="flex w-full gap-4 px-4 transition-all lg:flex-row md:flex md:gap-2 sm:flex md:gap-2 items-center"
+  >
+    <div *ngFor="let value of values" class="lg:p-2 md:p-0">
+      <!-- Toggle Button -->
+      <button
+        (click)="toggleComponent(value.toggle)"
+        class="lg:w-[20rem] md:w-[14rem] sm:w-[15rem] sm:text-sm flex items-center gap-2 h-12 border border-black rounded-lg shadow transition duration-300 ease-in hover:shadow-xl cursor-pointer"
+      >
+        <!-- Icon -->
+        <i [class]="value.icon" class="m-2 text-lg"></i>
+
+        <!-- Text Content -->
+        <div class="text-start">
+          <span class="text-sm block">{{ value.name }}</span>
+
+          <p class="" *ngIf="value.toggle === 'date'">
+            {{ getDisplayDate(value) }}
+          </p>
+
+          <p
+            class="text- flex gap-8"
+            *ngIf="value.toggle === 'traveller' && value.data"
+          >
+            {{ value.data }}
+          </p>
+        </div>
+      </button>
+
+      <!-- Component should show right below its button -->
+      <div class="mt-0">
+        <app-traveler
+          *ngIf="traveller && value.toggle === 'traveller'"
+        ></app-traveler>
+        <app-calendar
+          *ngIf="date && value.toggle === 'date'"
+          (dateRangeSelected)="onDateRangeChange($event)"
+        ></app-calendar>
+      </div>
+    </div>
+  </div>
+  <app-location
+    *ngIf="location"
+    (location)="onSelectLocation($event)"
+  ></app-location>
+</div>

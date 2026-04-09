@@ -1,0 +1,10 @@
+<div>
+  <app-heading [heading]="heading" class="text-2xl font-bold"></app-heading>
+  <app-slider>
+    <app-image-card
+      *ngFor="let card of imageCard"
+      [imageUrl]="card.imageUrl"
+      [Place]="card.place"
+    ></app-image-card>
+  </app-slider>
+</div>

@@ -1,0 +1,5 @@
+.image_ad img {
+  height: inherit;
+  width: inherit;
+  object-fit: cover;
+}

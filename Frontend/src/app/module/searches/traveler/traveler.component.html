@@ -1,0 +1,101 @@
+<div
+  *ngIf="display"
+  class="w-[30rem] border rounded-xl my-1 px-6 shadow overflow-y-auto absolute transform border shadow-xl rounded-3xl bg-white z-10"
+>
+  <!-- Header -->
+  <div class="relative flex items-center mt-2">
+    <button
+      (click)="toggle()"
+      class="flex items-center justify-center w-10 h-10 pb-1 rounded-full text-3xl font-normal text-sky-500 hover:bg-blue-200 hover:scale-110 hover:shadow-lg active:scale-95 active:bg-sky-200 transition-all duration-300 ease-out"
+    >
+      &times;
+    </button>
+    <p class="text-sm p-1 font-semibold">Travellers</p>
+  </div>
+
+  <!-- Rooms -->
+  <div class="my-4" *ngFor="let room of rooms">
+    <h1 class="text-xs font-semibold">Room {{ room.id }}</h1>
+
+    <!-- Adults -->
+    <div class="flex justify-between items-center my-4">
+      <p class="text-xs font-semibold">Adults</p>
+      <div class="flex gap-2">
+        <button
+          (click)="minus(room)"
+          class="flex items-center justify-center border w-10 h-10 pb-0 rounded-full text-lg font-normal text-black-500 hover:bg-blue-200 hover:scale-110 hover:shadow-lg active:scale-95 active:bg-sky-200 transition-all duration-300 ease-out"
+        >
+          <i class="fa-solid fa-minus"></i>
+        </button>
+        <p class="px-3 py-[6px]">{{ room.adults }}</p>
+        <button
+          (click)="plus(room)"
+          class="flex items-center justify-center border w-10 h-10 pb-0 rounded-full text-lg font-normal text-black-500 hover:bg-blue-200 hover:scale-110 hover:shadow-lg active:scale-95 active:bg-sky-200 transition-all duration-300 ease-out"
+        >
+          <i class="fa-solid fa-plus"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Children -->
+    <div class="flex justify-between items-center mb-2">
+      <div class="text-start leading-[3px]">
+        <p class="text-xs font-semibold">Children</p>
+        <span class="text-[10px] font-normal">(Age 0 to 17)</span>
+      </div>
+      <div class="flex gap-2">
+        <button
+          (click)="childMinus(room)"
+          class="flex items-center justify-center border w-10 h-10 pb-0 rounded-full text-lg font-normal text-black-500 hover:bg-blue-200 hover:scale-110 hover:shadow-lg active:scale-95 active:bg-sky-200 transition-all duration-300 ease-out"
+        >
+          <i class="fa-solid fa-minus"></i>
+        </button>
+        <p class="px-3 py-[6px]">{{ room.children }}</p>
+        <button
+          (click)="childPlus(room)"
+          class="flex items-center justify-center border w-10 h-10 pb-0 rounded-full text-lg font-normal text-black-500 hover:bg-blue-200 hover:scale-110 hover:shadow-lg active:scale-95 active:bg-sky-200 transition-all duration-300 ease-out"
+        >
+          <i class="fa-solid fa-plus"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Child Age Select -->
+    <div class="grid grid-cols-2 gap-2" *ngIf="room.children > 0">
+      <div *ngFor="let c of [].constructor(room.children); let i = index">
+        <p-floatlabel class="w-48" variant="in">
+          <p-select
+            inputId="child_age_{{ room.id }}_{{ i }}"
+            [options]="age"
+            optionLabel="name"
+            class="w-full"
+            variant="filled"
+          ></p-select>
+          <label for="child_age_{{ room.id }}_{{ i }}"
+            >Child {{ i + 1 }} age</label
+          >
+        </p-floatlabel>
+      </div>
+    </div>
+
+    <!-- Remove Room -->
+    <button
+      *ngIf="rooms.length > 1"
+      class="text-blue-500 font-semibold ml-auto my-4 block"
+      (click)="removeRoom(room)"
+    >
+      Remove room
+    </button>
+
+    <hr class="my-4" />
+  </div>
+
+  <!-- Add Room -->
+  <button
+    *ngIf="rooms.length < 8"
+    class="text-blue-500 font-semibold ml-auto mb-6 block"
+    (click)="plusRooms()"
+  >
+    Add another room
+  </button>
+</div>

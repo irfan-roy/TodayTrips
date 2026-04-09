@@ -1,0 +1,3 @@
+::ng-deep .custom-black-rating .p-rating-icon {
+  color: black !important;
+}

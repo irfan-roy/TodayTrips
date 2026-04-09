@@ -1,0 +1,21 @@
+<div class="my-6">
+  <app-heading [heading]="heading" class="text-2xl font-semibold"></app-heading>
+  <app-filter
+    [filters]="filters"
+    [places]="places"
+    (filteredData)="handleFilteredData($event)"
+  ></app-filter>
+  <div>
+    <app-slider>
+      <app-card
+        *ngFor="let card of filteredPlaces"
+        (click)="onCardClickId(card)"
+        [imageUrl]="card.images[0]"
+        [country]="card.location[0].country"
+        [place]="card.location[0].name"
+        [price]="card.price"
+      >
+      </app-card>
+    </app-slider>
+  </div>
+</div>

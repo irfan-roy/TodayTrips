@@ -1,0 +1,15 @@
+.btn-slider {
+  @apply absolute top-1/2 -translate-y-1/2 z-10 bg-white shadow px-3 py-[4px] rounded-full hover:bg-gray-100 transition duration-200 opacity-0;
+}
+
+.btn_lift {
+  @apply absolute left-4 top-1/2 -translate-y-1/2;
+}
+
+.btn_right {
+  @apply absolute right-4 top-1/2 -translate-y-1/2;
+}
+
+.btn-slider:hover {
+  @apply opacity-100;
+}

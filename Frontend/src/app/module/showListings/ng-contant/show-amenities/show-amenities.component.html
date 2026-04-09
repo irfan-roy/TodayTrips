@@ -1,0 +1,58 @@
+<div class="w-1/2 mb-10">
+  <h1 class="text-2xl my-6 font-semibold">Popular amenities</h1>
+  <div class="amenities grid grid-cols-2 gap-8">
+    <div
+      *ngFor="let amen of amenities"
+      class="flex items-center gap-4 text-lg font-normal"
+    >
+      <i [class]="amen.icon"></i>
+      <span>{{ amen.name }}</span>
+    </div>
+  </div>
+
+  <button
+    class="mt-4 font-semibold text-blue-500 hover:text-blue-700"
+    (click)="toggle()"
+  >
+    See all properties <i class="fa-solid fa-angle-right text-sm"></i>
+  </button>
+
+  <app-toggle-show *ngIf="display">
+    <app-filter
+      [filters]="filters"
+      (selectedFilterChange)="onFilterChange($event)"
+    ></app-filter>
+
+    <!-- Display All Property Amenities -->
+    <div *ngIf="selectedFilter === 'Amenities'">
+      <h1 class="text-lg">{{ information[0].name }}</h1>
+      <div *ngFor="let item of information[0]?.properties">
+        <h2 class="font-semibold mt-4 items-center">
+          <i [class]="item.icon" class="mr-2"></i>
+          {{ item.name }}
+        </h2>
+        <p *ngFor="let i of item.info" class="text-sm line text-sm leading-7">
+          {{ i }}
+        </p>
+      </div>
+    </div>
+
+    <!-- Display About this Property -->
+    <div *ngIf="selectedFilter === 'About'">
+      <div *ngFor="let item of information[1]?.information" class="mt-4">
+        <h2 class="font-semibold text-lg mb-2">
+          {{ item.name }}
+        </h2>
+        <ul class="list-disc list-inside ml-4 text-base">
+          <li *ngFor="let i of item.info">{{ i }}</li>
+        </ul>
+      </div>
+
+      <!-- Safe check and display -->
+      <div *ngFor="let i of information[1].Languages" class="border-t mt-4">
+        <h1 class="text-lg mt-2 font-base">{{ i.name }}</h1>
+        <p class="text-sm">{{ i.lang }}</p>
+      </div>
+    </div>
+  </app-toggle-show>
+</div>

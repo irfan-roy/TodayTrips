@@ -1,0 +1,44 @@
+<div class="my-5">
+  <div class="flex flex-col sm:flex-row gap-4 flex-wrap">
+    <div *ngFor="let value of values">
+      <button
+        (click)="toggleComponent(value.toggle)"
+        class="w-full sm:w-auto hover:border-blue-500 transition-colors"
+      >
+        <div
+          class="w-full sm:w-[25rem] border flex gap-2 items-center px-2 py-1 rounded-lg"
+        >
+          <i [class]="value.icon" class="m-2 text-xl text-gray-600"></i>
+
+          <div class="text-start flex-1">
+            <span class="text-sm text-gray-600 block">{{ value.name }}</span>
+            <p class="text-base sm:text-lg font-medium" *ngIf="value.date">
+              {{ value.date | date : "dd MMM" }}
+            </p>
+            <p
+              class="text- flex gap-8"
+              *ngIf="value.toggle === 'travelers' && value.data"
+            >
+              {{ value.data }}
+            </p>
+          </div>
+        </div>
+      </button>
+
+      <div class="mt-4">
+        <app-traveler
+          *ngIf="traveller && value.toggle == 'travelers'"
+        ></app-traveler>
+        <app-calender
+          *ngIf="startDate && value.toggle == 'startDate'"
+        ></app-calender>
+        <app-calender
+          *ngIf="endDate && value.toggle == 'endDate'"
+        ></app-calender>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toggle components outside the loop -->
+</div>
+<app-offer [offers]="offers" [data]="sendingData"></app-offer>

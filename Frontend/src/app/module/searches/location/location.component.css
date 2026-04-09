@@ -1,0 +1,35 @@
+.container {
+  background: linear-gradient(135deg, #fff 0%, #fff 100%);
+  min-height: 100vh;
+}
+
+:host {
+  display: block;
+  font-family: "Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.search-dropdown {
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+
+    &:hover {
+      background: #a8a8a8;
+    }
+  }
+}
+
+.location-card {
+  &:hover {
+    transform: translateY(-2px);
+  }
+}

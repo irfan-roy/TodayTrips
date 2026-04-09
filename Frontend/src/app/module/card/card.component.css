@@ -1,0 +1,5 @@
+.card img {
+  height: inherit;
+  width: inherit;
+  object-fit: fill;
+}

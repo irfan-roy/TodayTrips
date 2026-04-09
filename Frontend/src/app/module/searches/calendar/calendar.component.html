@@ -1,0 +1,110 @@
+<div
+  *ngIf="display"
+  class="max-w-md mx-auto bg-white rounded-2xl shadow-2xl border overflow-y-auto absolute transform z-30"
+>
+  <button
+    (click)="toggle()"
+    class="absolute flex items-center justify-center w-10 h-10 pb-1 m-2 rounded-full text-3xl font-normal text-sky-500 hover:bg-blue-200 hover:scale-110 hover:shadow-lg active:scale-95 active:bg-sky-200 transition-all duration-300 ease-out"
+  >
+    &times;
+  </button>
+  <div class="p-6 mt-4">
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-6">
+      <button
+        (click)="previousMonth()"
+        type="button"
+        class="p-3 hover:bg-gray-100 rounded-xl transition-colors duration-200 group focus:outline-none focus:ring-2 focus:ring-blue-500"
+      >
+        <svg
+          class="w-5 h-5 text-gray-600 group-hover:text-gray-800"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M15 19l-7-7 7-7"
+          ></path>
+        </svg>
+      </button>
+
+      <h2 class="text-2xl font-bold text-gray-800 select-none">
+        {{ getCurrentMonthYear() }}
+      </h2>
+
+      <button
+        (click)="nextMonth()"
+        type="button"
+        class="p-3 hover:bg-gray-100 rounded-xl transition-colors duration-200 group focus:outline-none focus:ring-2 focus:ring-blue-500"
+      >
+        <svg
+          class="w-5 h-5 text-gray-600 group-hover:text-gray-800"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 5l7 7-7 7"
+          ></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Days of Week -->
+    <div class="grid grid-cols-7 gap-2 mb-4">
+      <div
+        *ngFor="let day of daysOfWeek"
+        class="text-center text-sm font-semibold text-gray-500 py-2"
+      >
+        {{ day }}
+      </div>
+    </div>
+
+    <!-- Calendar Grid -->
+    <div class="grid grid-cols-7 gap-2 mb-6">
+      <button
+        *ngFor="let day of calendarDays; trackBy: trackByDate"
+        (click)="selectDate(day)"
+        [disabled]="!day.isCurrentMonth"
+        [ngClass]="getDayClasses(day)"
+        type="button"
+      >
+        {{ day.dayNumber }}
+      </button>
+    </div>
+
+    <!-- Selected Range -->
+    <div
+      *ngIf="startDate"
+      class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-4 mb-4 border border-blue-200 animate-fade-in"
+    >
+      <p class="text-blue-800 font-medium">Selected Range:</p>
+      <p class="text-blue-900 text-lg font-bold">{{ formatSelectedRange() }}</p>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="flex justify-between items-center">
+      <button
+        (click)="goToToday()"
+        type="button"
+        class="px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 font-medium shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+      >
+        Today
+      </button>
+
+      <button
+        (click)="clearSelection()"
+        type="button"
+        class="px-6 py-3 bg-gray-200 text-gray-700 rounded-xl hover:bg-gray-300 transition-colors duration-200 font-medium focus:outline-none focus:ring-2 focus:ring-gray-500"
+      >
+        Clear
+      </button>
+    </div>
+  </div>
+</div>

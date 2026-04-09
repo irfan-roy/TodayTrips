@@ -1,0 +1,21 @@
+.btn-slider {
+  @apply shadow px-4 py-[10px] rounded-full hover:bg-gray-100 transition duration-200;
+}
+.gradient-pulse {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.gradient-wave {
+  background-size: 300% 300%;
+  animation: gradient-flow 8s linear infinite;
+}

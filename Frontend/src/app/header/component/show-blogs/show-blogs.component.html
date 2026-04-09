@@ -1,0 +1,57 @@
+<div class="flex flex-col items-center min-h-screen bg-gray-50 py-8">
+  <!-- Hero Image -->
+  <div class="w-full h-[28rem] overflow-hidden shadow-xs-lg">
+    <img
+      [src]="blog?.image_url"
+      [alt]="blog?.headline || 'Blog post image'"
+      class="h-full w-full object-cover hover:scale-105 transition-transform duration-300"
+    />
+  </div>
+
+  <!-- Content -->
+  <article class="w-full max-w-4xl bg-white shadow-xl p-8">
+    <!-- Metadata Bar -->
+    <div
+      class="flex flex-wrap justify-between items-center gap-4 mb-8 pb-6 border-b border-gray-200"
+    >
+      <!-- Date -->
+      <time class="text-sm text-gray-600 flex items-center gap-2">
+        <svg
+          class="w-4 h-4"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+          />
+        </svg>
+        {{ blog?.createdAt | date : "MMM dd, yyyy" }}
+      </time>
+
+      <!-- Category Tag -->
+      <span
+        class="inline-flex items-center px-3 py-1 rounded-full text-xl font-medium text-blue-800"
+      >
+        #{{ blog?.category }}
+      </span>
+    </div>
+
+    <!-- Headline -->
+    <h1 class="text-4xl font-semibold text-gray-900 mb-6">
+      {{ blog?.headline }}
+    </h1>
+
+    <!-- Description -->
+    <div *ngFor="let des of descriptions">
+      <div
+        class="prose prose-lg max-w-none text-gray-700 leading-relaxed my-2 text-lg"
+      >
+        <p>{{ des }}</p>
+      </div>
+    </div>
+  </article>
+</div>

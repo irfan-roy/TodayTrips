@@ -1,0 +1,58 @@
+<div>
+  <div class="flex gap-1 h-[22rem] overflow-hidden rounded-2xl relative">
+    <!-- Left Large Image -->
+    <div class="w-[80%]">
+      <img
+        [src]="imagesData[0]?.img"
+        alt="Main Image"
+        class="w-full h-full object-cover rounded-l-2xl cursor-pointer"
+        (click)="toggle()"
+      />
+    </div>
+
+    <!-- Right 2x2 Grid Images (skip the first one) -->
+    <div class="grid grid-rows-2 grid-cols-2 gap-1 h-full w-full">
+      <div *ngFor="let image of imagesData.slice(1, 5)">
+        <img
+          [src]="image.img"
+          alt="Image"
+          class="w-full h-full object-cover cursor-pointer"
+          (click)="toggle()"
+        />
+      </div>
+    </div>
+
+    <!-- Button to Show All -->
+    <button
+      class="absolute bottom-6 right-6 bg-white p-1 px-4 rounded-2xl flex items-center gap-1 shadow"
+      (click)="toggle()"
+    >
+      <i class="fa-solid fa-ellipsis-vertical"></i>
+      <i class="fa-solid fa-ellipsis-vertical m-[2.5px]"></i>
+      <i class="fa-solid fa-ellipsis-vertical mr-1"></i>
+      <span class="ml-2 text-sm font-medium">Show all images</span>
+    </button>
+  </div>
+
+  <!-- Toggle Show Content -->
+  <app-toggle-show *ngIf="display">
+    <app-filter
+      [filters]="filters"
+      (selectedFilterChange)="handleFilteredData($event)"
+    ></app-filter>
+
+    <div class="mt-4">
+      <h1>All photos</h1>
+      <div class="grid grid-cols-2 gap-4">
+        <div *ngFor="let item of filteredData">
+          <img
+            [src]="item.img"
+            alt=""
+            class="h-[22rem] w-[50rem] rounded object-cover"
+          />
+          <p class="mt-2 text-sm text-gray-700">{{ item.text }}</p>
+        </div>
+      </div>
+    </div>
+  </app-toggle-show>
+</div>

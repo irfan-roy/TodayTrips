@@ -1,0 +1,55 @@
+/* Fade + Zoom */
+.fadeZoom {
+  animation: fadeZoom 1s ease-in-out;
+}
+@keyframes fadeZoom {
+  0% {
+    opacity: 0;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Slide from Right */
+.slideLeft {
+  animation: slideLeft 1s ease-in-out;
+}
+@keyframes slideLeft {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Slide from Left */
+.slideRight {
+  animation: slideRight 1s ease-in-out;
+}
+@keyframes slideRight {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Rotate + Fade */
+.rotateFade {
+  animation: rotateFade 1s ease-in-out;
+}
+@keyframes rotateFade {
+  0% {
+    opacity: 0;
+    transform: rotate(10deg) scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(0) scale(1);
+  }
+}

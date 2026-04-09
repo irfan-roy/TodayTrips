@@ -1,0 +1,18 @@
+<div class="popular_f mt-8">
+  <h1 class="text-xl font-medium">{{ filterName }}</h1>
+  <form [formGroup]="formGroup" class="flex items-center gap-2 my-4">
+    <div class="flex flex-col gap-2">
+      <div *ngFor="let type of propertyTypes" class="flex items-center gap-2">
+        <input
+          type="checkbox"
+          [formControlName]="type"
+          [id]="type"
+          class="w-[20px] h-[20px] checkbox"
+        />
+        <label [for]="type" class="cursor-pointer text-current">{{
+          type
+        }}</label>
+      </div>
+    </div>
+  </form>
+</div>

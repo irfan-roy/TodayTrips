@@ -1,0 +1,17 @@
+/* Define reusable class */
+.btn-slider {
+  @apply absolute top-1/2 -translate-y-1/2 bg-white shadow px-4 py-2 rounded-full hover:bg-gray-100 transition duration-200;
+}
+
+.btn-slider-left {
+  @apply left-0;
+}
+
+.btn-slider-right {
+  @apply right-0;
+}
+
+.slider {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: back; /* IE 10+ */
+}

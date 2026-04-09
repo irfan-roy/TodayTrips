@@ -1,0 +1,130 @@
+<div>
+  <!-- upper section (1st) -->
+  <section class="container mx-auto px-20 py-8">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+      <!-- info -->
+      <div class="flex-1 space-y-6 flex flex-col items-center">
+        <p class="text-lg text-gray-600">
+          Life is short, and the world is wide; travel more, worry less
+        </p>
+
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900">
+          Your journey begins here
+        </h1>
+
+        <button
+          class="p-2 bg-black text-white font-semibold px-6 rounded-full hover:bg-gray-800 transition-colors"
+        >
+          Read more..
+        </button>
+      </div>
+
+      <!-- image -->
+      <div class="flex-1 max-w-2xl">
+        <img
+          src="https://images.unsplash.com/photo-1580502304784-8985b7eb7260?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          alt="santorini"
+          class="w-full h-auto object-cover rounded-lg shadow-lg"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- component 1 -->
+  <section class="px-24 py-8">
+    <div
+      class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-2 justify-items-center mb-2"
+    >
+      <app-square-card
+        *ngFor="let blog of visibleSection1"
+        [blog]="blog"
+        (cardClick)="OnClickById($event)"
+      ></app-square-card>
+    </div>
+    <div class="flex items-center justify-center">
+      <button
+        class="px-6 py-2 bg-black text-white font-semibold rounded-full hover:bg-gray-800 transition-colors"
+        (click)="toggleSection1()"
+      >
+        {{ showAllSection1 ? "Read less" : "Read more.." }}
+      </button>
+    </div>
+  </section>
+
+  <!-- component 2 -->
+  <section>
+    <div class="flex items-center justify-center gap-4">
+      <app-rectangle-card
+        [blog]="getBlog(2, 1)"
+        (cardClick)="OnClickById($event)"
+      ></app-rectangle-card>
+      <app-square-card
+        [blog]="getBlog(2, 2)"
+        (cardClick)="OnClickById($event)"
+      ></app-square-card>
+    </div>
+
+    <div class="flex items-center justify-center gap-4 flex-reverse">
+      <app-square-card
+        [blog]="getBlog(2, 3)"
+        (cardClick)="OnClickById($event)"
+      ></app-square-card>
+      <app-rectangle-card
+        [blog]="getBlog(2, 4)"
+        (cardClick)="OnClickById($event)"
+      ></app-rectangle-card>
+    </div>
+  </section>
+
+  <!-- component 3 -->
+
+  <section>
+    <app-image-change></app-image-change>
+  </section>
+
+  <!-- component 4 -->
+  <section>
+    <div class="flex items-center justify-center gap-4">
+      <app-rectangle-card
+        [blog]="getBlog(3, 1)"
+        (cardClick)="OnClickById($event)"
+      ></app-rectangle-card>
+      <app-square-card
+        [blog]="getBlog(3, 2)"
+        (cardClick)="OnClickById($event)"
+      ></app-square-card>
+    </div>
+
+    <div class="flex items-center justify-center gap-4 flex-reverse">
+      <app-square-card
+        [blog]="getBlog(3, 3)"
+        (cardClick)="OnClickById($event)"
+      ></app-square-card>
+      <app-rectangle-card
+        [blog]="getBlog(3, 4)"
+        (cardClick)="OnClickById($event)"
+      ></app-rectangle-card>
+    </div>
+  </section>
+
+  <!-- component 5 -->
+  <section class="px-24 py-8">
+    <div
+      class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-2 justify-items-center mb-2"
+    >
+      <app-square-card
+        *ngFor="let blog of visibleSection4"
+        [blog]="blog"
+        (cardClick)="OnClickById($event)"
+      ></app-square-card>
+    </div>
+    <div class="flex items-center justify-center">
+      <button
+        class="px-6 py-2 bg-black text-white font-semibold rounded-full hover:bg-gray-800 transition-colors"
+        (click)="toggleSection4()"
+      >
+        {{ showAllSection4 ? "Show less" : "Read more.." }}
+      </button>
+    </div>
+  </section>
+</div>

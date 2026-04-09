@@ -1,0 +1,56 @@
+<!-- <div
+  class="overflow-x-auto whitespace-nowrap snap-x snap-mandatory scroll-smooth px-4 py-6"
+>
+  <div class="flex gap-4">
+    <app-card
+      *ngFor="let card of cards"
+      [imageUrl]="card.imageUrl"
+      [country]="card.country"
+      [place]="card.place"
+      [price]="card.price"
+      [totalPrice]="card.totalPrice"
+      [avgPrice]="card.avgPrice"
+    >
+    </app-card>
+  </div>
+</div> -->
+
+<div class="my-4">
+  <app-heading [heading]="heading" [text]="text"></app-heading>
+  <div class="relative w-full group">
+    <!-- Slider Buttons -->
+    <button
+      (click)="prev()"
+      class="btn-slider btn-slider-left opacity-0 group-hover:opacity-100 z-30"
+    >
+      <i class="fa-solid fa-angle-left text-xl text-blue-800"></i>
+    </button>
+
+    <button
+      (click)="next()"
+      class="btn-slider btn-slider-right opacity-0 group-hover:opacity-100 z-30"
+    >
+      <i class="fa-solid fa-angle-right text-xl text-blue-800"></i>
+    </button>
+
+    <!-- Scrollable Container -->
+    <div
+      #scrollContainer
+      class="whitespace-nowrap snap-x snap-mandatory scroll-smooth px-8 overflow-x-auto slider"
+    >
+      <div class="flex gap-4 slider_cards">
+        <app-place-card
+          *ngFor="let card of cards"
+          [title]="card.title"
+          [country]="card.country"
+          [images]="card.images"
+          [review]="card?.ratings"
+          [price]="card.price"
+          ParentClass=" ease-in-out"
+          infoClass="p-2 border rounded-b-2xl "
+          card="w-[18rem] h-[12rem]"
+        ></app-place-card>
+      </div>
+    </div>
+  </div>
+</div>

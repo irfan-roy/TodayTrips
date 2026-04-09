@@ -1,0 +1,11 @@
+.terms a {
+  @apply text-blue-600 font-semibold;
+}
+
+.transactionUL li {
+  @apply mb-2;
+}
+
+.success {
+  @apply w-full max-w-full md:min-w-[40rem] md:max-w-[80rem] h-[40rem] !important;
+}

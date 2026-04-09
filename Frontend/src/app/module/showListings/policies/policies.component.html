@@ -1,0 +1,62 @@
+<div class="px-10">
+  <div *ngFor="let output of propertyPolicies" class="flex justify-between">
+    <h1 class="text-2xl font-bold pb-2 mt-6 w-1/2">
+      {{ output.name }}
+    </h1>
+
+    <!-- Loop for Policies -->
+    <div class="w-full mt-8">
+      <section class="gap-10 flex justify-between">
+        <div *ngFor="let police of output.Policies">
+          <h2 class="text-lg font-semibold text-gray-800">
+            {{ police.name }}
+          </h2>
+          <ul class="list-inside text-gray-600 space-y-1">
+            <li *ngFor="let val of police.value">
+              {{ val }}
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Loop for Additional -->
+      <section class="mt-8">
+        <div *ngFor="let police of output.additional">
+          <h2 class="text-lg font-semibold text-gray-800">
+            {{ police.name }}
+          </h2>
+          <ul class="list-inside text-gray-600 space-y-1">
+            <li *ngFor="let val of police.value">
+              {{ val }}
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Loop for Payments -->
+      <section class="flex flex-wrap gap-2">
+        <div *ngFor="let pay of output.payments">
+          <img
+            [src]="pay.img"
+            alt=""
+            class="h-20 w-32 object-cover border border-gray-400"
+          />
+        </div>
+      </section>
+
+      <!-- loop for information -->
+      <section class="my-8">
+        <div *ngFor="let info of output.information">
+          <h2 class="text-lg font-semibold text-gray-800">
+            {{ info.name }}
+          </h2>
+          <ul class="list-inside text-gray-600 space-y-1">
+            <li *ngFor="let val of info.value" class="my-4">
+              {{ val }}
+            </li>
+          </ul>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

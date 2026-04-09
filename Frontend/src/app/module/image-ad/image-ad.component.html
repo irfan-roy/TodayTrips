@@ -1,0 +1,15 @@
+<div class="container mx-4 relative">
+  <div class="image_ad h-[40rem] w-full">
+    <img class="static rounded-3xl" [src]="ads.imageUrl" alt="dubai" />
+  </div>
+  <div
+    class="absolute bottom-[25px] left-[1rem] bg-white w-96 p-4 flex flex-wrap justify-center text-center border-2 rounded-3xl shadow"
+  >
+    <p class="text-[30px] font-bold">{{ ads.package }}</p>
+    <button
+      class="p-2 px-6 border-2 rounded-3xl bg-[#222] font-bold shadow-md mt-2 text-white text-xl"
+    >
+      <a href="/">{{ ads.action }}</a>
+    </button>
+  </div>
+</div>
